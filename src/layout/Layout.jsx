@@ -5,8 +5,10 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <main>
-        <Outlet />
+      <main className="w-full h-full ">
+        <div className="w-[80%] mx-auto justify-center items-center">
+          <Outlet />
+        </div>
       </main>
       <Footer />
     </>
