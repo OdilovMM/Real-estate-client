@@ -1,15 +1,17 @@
 import HomePage from "./HomePage";
 import GalleryPage from "./GalleryPage";
 import LoginPage from "./LoginPage";
-import ProfilePage from "./ProfilePage";
 import RegisterPage from "./RegisterPage";
 import SinglePage from "./SinglePage";
+import ProfileContentView from "./ProfileContentView";
+import ProfileDashboard from "./ProfileDashboard";
 
 export {
   HomePage,
   GalleryPage,
   LoginPage,
-  ProfilePage,
   SinglePage,
   RegisterPage,
+  ProfileContentView,
+  ProfileDashboard,
 };

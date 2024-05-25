@@ -3,11 +3,13 @@ import {
   GalleryPage,
   HomePage,
   LoginPage,
-  ProfilePage,
+  ProfileDashboard,
   RegisterPage,
   SinglePage,
 } from "./pages";
 import Layout from "./layout/Layout";
+import ProfileLayout from "./layout/ProfileLayout";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   return (
@@ -19,7 +21,16 @@ function App() {
           <Route path="gallery/:postId" element={<SinglePage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="login" element={<LoginPage />} />
-          <Route path="profile" element={<ProfilePage />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfileLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<ProfileDashboard />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
