@@ -1,13 +1,42 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "../features/auth/authSlice";
+import { PulseLoader } from "react-spinners";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({});
+  const dispatch = useDispatch();
+  const { isLoading, userInfo } = useSelector((state) => state.auth);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(registerUser(formData));
+  };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    } else {
+      return;
+    }
+  }, [userInfo, navigate, dispatch]);
+
   return (
     <div className="w-full h-[85vh] my-2 flex justify-center items-center">
       <div>
         <h2 className="text-[18px] mb-4 font-bold text-gray-500">
           Register an account
         </h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-5">
             <div className="relative">
               <label className="flex  items-center mb-2 text-gray-600 text-xs font-medium">
@@ -29,6 +58,7 @@ const RegisterPage = () => {
               <input
                 type="text"
                 name="firstName"
+                onChange={handleChange}
                 id="firstName"
                 className="block w-full max-w-xs px-4 py-2 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none leading-relaxed"
                 placeholder="First Name"
@@ -56,6 +86,7 @@ const RegisterPage = () => {
                 type="text"
                 name="lastName"
                 id="lastName"
+                onChange={handleChange}
                 className="block w-full max-w-xs px-4 py-2 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none leading-relaxed"
                 placeholder="Last Name"
                 required=""
@@ -81,6 +112,7 @@ const RegisterPage = () => {
               <input
                 type="text"
                 name="username"
+                onChange={handleChange}
                 id="username"
                 className="block w-full max-w-xs px-4 py-2 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none leading-relaxed"
                 placeholder="Username"
@@ -107,6 +139,7 @@ const RegisterPage = () => {
               <input
                 type="email"
                 name="email"
+                onChange={handleChange}
                 id="email"
                 className="block w-full max-w-xs px-4 py-2 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none leading-relaxed"
                 placeholder="email"
@@ -133,6 +166,7 @@ const RegisterPage = () => {
               <input
                 type="password"
                 name="password"
+                onChange={handleChange}
                 id="password"
                 className="block w-full max-w-xs px-4 py-2 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none leading-relaxed"
                 placeholder="password"
@@ -141,9 +175,12 @@ const RegisterPage = () => {
             </div>
           </div>
 
-          <button className="relative mt-4 w-full inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+          <button
+            disabled={isLoading}
+            className="relative mt-4 w-full inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
+          >
             <span className="relative w-full  px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              Register
+              {isLoading ? <PulseLoader size={12} color="white" /> : "Register"}
             </span>
           </button>
         </form>

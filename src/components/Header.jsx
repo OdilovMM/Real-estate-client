@@ -1,16 +1,34 @@
-import React from "react";
 import main from "../assets/logo.png";
-import { Link } from "react-router-dom";
 import Search from "./Search";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser, resetUser } from "../features/auth/authSlice";
+import { PulseLoader } from "react-spinners";
+import api from "../utils/api";
+
 const Header = () => {
-  //   const user = false;
-  const user = true;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isLoading, userInfo } = useSelector((state) => state.auth);
+
+  const handleLogoutUser = async () => {
+    try {
+      await api.get("/auth/logout");
+      localStorage.removeItem("accessToken");
+      dispatch(resetUser());
+      navigate("/login");
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
   return (
     <header className="bg-slate-200 w-full h-[90px] items-center flex">
       <div className="flex justify-between items-center w-[80%] mx-auto">
         <div className="w-3/12 flex">
-          <Link to="/" className="w-[60px] h-[50px]">
-            <img src={main} alt="" />
+          <Link to="/profile" className="w-[80px] h-[60px]">
+            <img src={main} alt="" className="w-full h-full" />
           </Link>
         </div>
         <div className="w-9/12 flex justify-between items-center">
@@ -28,7 +46,7 @@ const Header = () => {
           <Search />
           <div>
             <div className="flex  justify-between items-center gap-6 px-1">
-              {user ? (
+              {userInfo ? (
                 <>
                   <div className="w-[60px] h-[60px] rounded-full overflow-hidden">
                     <Link to="/profile">
@@ -39,8 +57,8 @@ const Header = () => {
                       />
                     </Link>
                   </div>
-                  <Link
-                    to="/login"
+                  <button
+                    onClick={handleLogoutUser}
                     className="relative w-[100px] inline-flex items-center justify-center px-3.5 py-1.5 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-indigo-500 rounded-lg shadow-md group"
                   >
                     <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-indigo-500 group-hover:translate-x-0 ease">
@@ -63,9 +81,9 @@ const Header = () => {
                       Logout
                     </span>
                     <span className="relative text-base font-semibold invisible">
-                      Login
+                      Logout
                     </span>
-                  </Link>
+                  </button>
                 </>
               ) : (
                 <>
