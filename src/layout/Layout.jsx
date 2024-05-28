@@ -6,7 +6,7 @@ const Layout = () => {
     <>
       <Header />
       <main className="w-full h-full ">
-        <div className="w-[80%] mx-auto justify-center items-center">
+        <div className="w-[80%] h-full mx-auto justify-center items-center">
           <Outlet />
         </div>
       </main>

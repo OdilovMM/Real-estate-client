@@ -11,6 +11,8 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, userInfo } = useSelector((state) => state.auth);
+  const { userMe } = useSelector((state) => state.user);
+
 
   const handleLogoutUser = async () => {
     try {
@@ -19,7 +21,7 @@ const Header = () => {
       dispatch(resetUser());
       navigate("/login");
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error?.response?.data);
     }
   };
 
@@ -27,7 +29,7 @@ const Header = () => {
     <header className="bg-slate-200 w-full h-[90px] items-center flex">
       <div className="flex justify-between items-center w-[80%] mx-auto">
         <div className="w-3/12 flex">
-          <Link to="/profile" className="w-[80px] h-[60px]">
+          <Link to="/" className="w-[80px] h-[60px]">
             <img src={main} alt="" className="w-full h-full" />
           </Link>
         </div>
@@ -52,7 +54,7 @@ const Header = () => {
                     <Link to="/profile">
                       <img
                         className="object-center h-full cursor-pointer"
-                        src="https://w7.pngwing.com/pngs/205/731/png-transparent-default-avatar-thumbnail.png"
+                        src={`http://localhost:5000/images/users/${userMe.avatar}`}
                         alt=""
                       />
                     </Link>

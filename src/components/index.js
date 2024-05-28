@@ -6,5 +6,16 @@ import Pin from "./Pin";
 import Search from "./Search";
 import Slider from "./Slider";
 import ProfileNavlink from "./ProfileNavlink";
+import Cart from "./Cart";
 
-export { Filter, Footer, Header, Map, Pin, Search, Slider, ProfileNavlink };
+export {
+  Filter,
+  Footer,
+  Cart,
+  Header,
+  Map,
+  Pin,
+  Search,
+  Slider,
+  ProfileNavlink,
+};

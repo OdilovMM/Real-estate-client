@@ -7,14 +7,16 @@ import store from "./store/index.js";
 import { Toaster } from "react-hot-toast";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-      <Toaster
-        toastOptions={{
-          position: "top-center",
-        }}
-      />
-    </Provider>
-  </React.StrictMode>
+  // <React.StrictMode>
+    <>
+      <Provider store={store}>
+        <App />
+        <Toaster
+          toastOptions={{
+            position: "top-center",
+          }}
+        />
+      </Provider>
+    </>
+  // </React.StrictMode>
 );

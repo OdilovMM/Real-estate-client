@@ -4,6 +4,11 @@ import { IoChatbubblesOutline, IoHeartOutline } from "react-icons/io5";
 import { RxDashboard } from "react-icons/rx";
 import { SiShopee } from "react-icons/si";
 import { NavLink } from "react-router-dom";
+import { CiHome, CiShoppingTag } from "react-icons/ci";
+import { MdAddToHomeScreen } from "react-icons/md";
+import { HiMiniUser } from "react-icons/hi2";
+import { MdUpdate } from "react-icons/md";
+import { GrDocumentUpdate } from "react-icons/gr";
 
 const ProfileNavlink = () => {
   return (
@@ -12,7 +17,7 @@ const ProfileNavlink = () => {
         <ul className="flex flex-col items-start justify-start">
           <li className="hover:bg-slate-300 w-full px-4 sm:px-2 transition-all duration-200 ">
             <NavLink
-              to="/dashboard"
+              to="/profile"
               className="flex items-center justify-start gap-3 py-1 "
             >
               <span>
@@ -23,66 +28,66 @@ const ProfileNavlink = () => {
           </li>
           <li className="hover:bg-slate-300 w-full px-4 sm:px-2 transition-all duration-200 ">
             <NavLink
-              to="/add-post"
+              to="/profile/add-post"
               className="flex items-center justify-start gap-3 py-1 "
             >
               <span>
-                <RxDashboard size={20} />
+                <CiHome size={20} />
               </span>
               <span>Add New Post</span>
             </NavLink>
           </li>
           <li className="hover:bg-slate-300 w-full px-4 sm:px-2 transition-all duration-200 ">
             <NavLink
-              to="/view-posts"
+              to="/profile/view-posts"
               className="flex items-center justify-start gap-3 py-1 "
             >
               <span>
-                <RxDashboard size={20} />
+                <MdAddToHomeScreen size={20} />
               </span>
               <span>View My posts</span>
             </NavLink>
           </li>
           <li className="hover:bg-slate-300 w-full px-4 sm:px-2 transition-all duration-200 ">
             <NavLink
-              to="/saved-posts"
+              to="/profile/saved-posts"
               className="flex items-center justify-start gap-3 py-1 "
             >
               <span>
-                <RxDashboard size={20} />
+                <CiShoppingTag size={20} />
               </span>
               <span>View Saved Posts</span>
             </NavLink>
           </li>
           <li className="hover:bg-slate-300 w-full px-4 sm:px-2 transition-all duration-200 ">
             <NavLink
-              to="/my-information"
+              to="/profile/my-information"
               className="flex items-center justify-start gap-3 py-1 "
             >
               <span>
-                <RxDashboard size={20} />
+                <HiMiniUser size={20} />
               </span>
               <span>My Information</span>
             </NavLink>
           </li>
           <li className="hover:bg-slate-300 w-full px-4 sm:px-2 transition-all duration-200 ">
             <NavLink
-              to="/update-password"
+              to="/profile/update-password"
               className="flex items-center justify-start gap-3 py-1 "
             >
               <span>
-                <RxDashboard size={20} />
+                <MdUpdate size={20} />
               </span>
               <span>Update Password</span>
             </NavLink>
           </li>
           <li className="hover:bg-slate-300 w-full px-4 sm:px-2 transition-all duration-200 ">
             <NavLink
-              to="/update-user"
+              to="/profile/update-user"
               className="flex items-center justify-start gap-3 py-1 "
             >
               <span>
-                <RxDashboard size={20} />
+                <GrDocumentUpdate size={20} />
               </span>
               <span>Update User Info</span>
             </NavLink>
