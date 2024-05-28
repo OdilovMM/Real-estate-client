@@ -44,6 +44,21 @@ export const deletePost = createAsyncThunk(
   }
 );
 
+export const getLatestRentAndBuy = createAsyncThunk(
+  "post/getLatestRentAndBuy",
+  async (_, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.get(`/posts/latest-posts`, {
+        withCredentials: true,
+      });
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 // export const updateProduct = createAsyncThunk(
 //   "product/updateProduct",
 //   async (product, { rejectWithValue, fulfillWithValue }) => {
@@ -90,6 +105,9 @@ export const postSlice = createSlice({
   initialState: {
     isLoading: false,
     posts: [],
+    latestBuy: [],
+    latestRent: [],
+    allPosts: [],
     postCount: 0,
     savedPostsList: [],
     savedPostsCount: 0,
@@ -132,6 +150,22 @@ export const postSlice = createSlice({
         toast.success(payload.status);
       })
       .addCase(deletePost.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        console.log(payload);
+      })
+      .addCase(getLatestRentAndBuy.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
+      .addCase(getLatestRentAndBuy.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.latestBuy = payload.data.latestBuy;
+        state.latestRent = payload.data.latestRent;
+        state.allPosts = payload.data.allPosts;
+        // state.posts = state.posts.filter((post) => post._id !== payload.postId);
+        console.log(payload.data);
+        // toast.success(payload.status);
+      })
+      .addCase(getLatestRentAndBuy.rejected, (state, { payload }) => {
         state.isLoading = false;
         console.log(payload);
       });

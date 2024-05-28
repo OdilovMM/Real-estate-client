@@ -3,6 +3,7 @@ import "leaflet/dist/leaflet.css";
 import Pin from "./Pin";
 
 const Map = ({ items }) => {
+  console.log(items)
   return (
     <div className="w-full mt-10 h-[400px]  overflow-hidden relative rounded-md">
       <MapContainer
@@ -15,9 +16,9 @@ const Map = ({ items }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {/* {items.map((item) => (
+        {items.map((item) => (
           <Pin item={item} key={item.id} />
-        ))} */}
+        ))}
       </MapContainer>
     </div>
   );
